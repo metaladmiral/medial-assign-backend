@@ -1,3 +1,3 @@
-import createPost from "./add-post";
+import createPost from "./create-post";
 
 export { createPost };

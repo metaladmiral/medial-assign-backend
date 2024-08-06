@@ -1,28 +1,12 @@
 import { Prisma } from "@prisma/client";
 import prisma from "./prisma";
-import { UserUpdateObj } from "../types";
+import { Post } from "../types";
 
 const PostDbService = {
-  createPost: async (
-    user_id: string,
-    name: string,
-    phone: string,
-    state: string,
-    password: string,
-    occupation?: string,
-    webpush?: string
-  ) => {
+  createPost: async (newPostObj: Post) => {
     try {
-      return await prisma.users.create({
-        data: {
-          user_id: user_id,
-          name: name,
-          phone: phone,
-          occupation: occupation || null,
-          web_push_subscription: webpush,
-          password: password,
-          state: state,
-        },
+      return await prisma.post.create({
+        data: newPostObj,
       });
     } catch (err) {
       if (err instanceof Prisma.PrismaClientKnownRequestError) {

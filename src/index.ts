@@ -1,22 +1,24 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { createPost } from "./controllers/controllers";
-
-const globalRouter = express.Router();
+import fileUploadMiddleware from "./middlewares/fileUploadMiddleware";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json());
 app.use(cors());
+
+const globalRouter = express.Router();
 app.use("/v1", globalRouter);
+
+app.use(express.static(__dirname + "/public"));
+app.use("/uploads", express.static("uploads"));
 
 dotenv.config();
 
-globalRouter.get("/", (req, res) => {
-  res.send("Hello, TypeScript with Express!");
-});
-
-globalRouter.post("/create-post", (req, res) => {
+globalRouter.post("/create-post", fileUploadMiddleware(), (req, res) => {
   createPost(req, res);
 });
 globalRouter.get("/get-post-list", (req, res) => {
