@@ -22,6 +22,9 @@ app.use("/public", express.static("public"));
 
 dotenv.config();
 
+app.get("/", (req, res) => {
+  res.send("Test ENDp!");
+});
 globalRouter.post("/create-post", fileUploadMiddleware(), (req, res) => {
   createPost(req, res);
 });
