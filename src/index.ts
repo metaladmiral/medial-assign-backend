@@ -13,8 +13,7 @@ app.use(cors());
 const globalRouter = express.Router();
 app.use("/v1", globalRouter);
 
-app.use(express.static(__dirname + "/public"));
-app.use("/uploads", express.static("uploads"));
+app.use("/public", express.static("public"));
 
 dotenv.config();
 

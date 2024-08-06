@@ -27,7 +27,10 @@ export const templateHTML = `
 
                 <div class='bottom'>
                     <h1>{{title}}</h1>
-                    <img src='https://analyticsindiamag.com/wp-content/uploads/2024/07/Mohits-Banners-4-1300x731.jpg'>
+                    {{#if imgurl}}
+                    <img src='{{}}'>
+                    {{/if}}
+
                 </div>
             </div>
             <div class='right'>
