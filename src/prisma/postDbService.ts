@@ -23,20 +23,30 @@ const PostDbService = {
     }
   },
 
-  //   getUserDetails: async (userId: string) => {
-  //     try {
-  //       const userDetails = await prisma.users.findUnique({
-  //         where: {
-  //           user_id: userId,
-  //         },
-  //       });
-  //       return userDetails;
-  //     } catch (err) {
-  //       throw err;
-  //     } finally {
-  //       prisma.$disconnect;
-  //     }
-  //   },
+  getPostsList: async (limit?: number, offset?: number) => {
+    try {
+      const posts = await prisma.post.findMany();
+      return posts;
+    } catch (err) {
+      throw err;
+    } finally {
+      prisma.$disconnect;
+    }
+  },
+  // getPostList: async (userId: string) => {
+  //   try {
+  //     const userDetails = await prisma.post.findUnique({
+  //       where: {
+  //         user_id: userId,
+  //       },
+  //     });
+  //     return userDetails;
+  //   } catch (err) {
+  //     throw err;
+  //   } finally {
+  //     prisma.$disconnect;
+  //   }
+  // },
 };
 
 export default PostDbService;

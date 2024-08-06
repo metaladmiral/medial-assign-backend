@@ -1,7 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import { createPost, generateOgImage } from "./controllers/controllers";
+import {
+  createPost,
+  generateOgImage,
+  getPostsList,
+} from "./controllers/controllers";
 import fileUploadMiddleware from "./middlewares/fileUploadMiddleware";
 
 const app = express();
@@ -20,8 +24,8 @@ dotenv.config();
 globalRouter.post("/create-post", fileUploadMiddleware(), (req, res) => {
   createPost(req, res);
 });
-globalRouter.get("/get-post-list", (req, res) => {
-  res.send("Hello, TypeScript with Express!");
+globalRouter.get("/get-posts-list", (req, res) => {
+  getPostsList(req, res);
 });
 globalRouter.get("/get-post-details", (req, res) => {
   res.send("Hello, TypeScript with Express!");
