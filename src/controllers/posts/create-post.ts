@@ -1,6 +1,6 @@
 import { Response, Request } from "express";
-import PostDbService from "../prisma/postDbService";
-import { Post } from "../types";
+import PostDbService from "../../prisma/postDbService";
+import { Post } from "../../types";
 
 async function createPost(req: Request, res: Response) {
   const postDetails = req.body;
