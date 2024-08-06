@@ -12,3 +12,10 @@ export type ogImageData = {
   content: string;
   img?: string;
 };
+
+export type OgImgCompiledHTMLObj = {
+  title: string;
+  content: string;
+  styles: string;
+  img?: string;
+};

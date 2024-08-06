@@ -2,6 +2,7 @@ import { Response, Request, query } from "express";
 import Handlebars from "handlebars";
 import puppeteer from "puppeteer";
 import { templateHTML, templateStyles } from "./og-img-template";
+import { OgImgCompiledHTMLObj } from "../../types";
 
 function getFontSize(title = "") {
   if (!title || typeof title !== "string") return "";
@@ -15,17 +16,23 @@ function getFontSize(title = "") {
 async function generateOgImage(req: Request, res: Response) {
   const postData = req.body;
   const serverURL = process.env.SERVER_URL;
-  const publicImgURL = serverURL + "/public/uploads/" + postData.img;
 
   const compiledStyles = Handlebars.compile(templateStyles)({
     fontSize: getFontSize(postData.title as string),
   });
-  const compiledHTML = Handlebars.compile(templateHTML)({
+
+  let OgImgCompiledHTMLObj: OgImgCompiledHTMLObj = {
     title: postData.title,
     content: postData.content,
-    img: publicImgURL,
     styles: compiledStyles,
-  });
+  };
+
+  if (postData.img !== undefined) {
+    const publicImgURL = serverURL + "/public/uploads/" + postData.img;
+    OgImgCompiledHTMLObj.img = publicImgURL;
+  }
+
+  const compiledHTML = Handlebars.compile(templateHTML)(OgImgCompiledHTMLObj);
   const browser = await puppeteer.launch({
     headless: false,
     args: ["--no-sandbox"],
