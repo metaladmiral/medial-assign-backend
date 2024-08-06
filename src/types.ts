@@ -5,7 +5,10 @@ export interface RequestWithUser extends Request {
   user?: JwtPayload; // Define the user property as optional
 }
 
-export type UserUpdateObj = {
-  web_push_subscription?: string;
-  last_login?: Date;
+export type Post = {
+  title: string;
+  content: string;
+  img_url?: string;
+  created_at?: Date;
+  updated_at?: Date;
 };
