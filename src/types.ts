@@ -2,7 +2,7 @@ export type Post = {
   title: string;
   content: string;
   postid: string;
-  img?: boolean;
+  img?: string;
   created_at?: Date;
   updated_at?: Date;
 };
