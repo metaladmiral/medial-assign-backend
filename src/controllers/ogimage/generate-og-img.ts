@@ -13,16 +13,17 @@ function getFontSize(title = "") {
 }
 
 async function generateOgImage(req: Request, res: Response) {
-  const queryData = req.query;
+  const postData = req.body;
+  const serverURL = process.env.SERVER_URL;
+  const publicImgURL = serverURL + "/public/uploads/" + postData.img;
+
   const compiledStyles = Handlebars.compile(templateStyles)({
-    bgUrl: queryData.bgUrl,
-    fontSize: getFontSize(queryData.title as string),
+    fontSize: getFontSize(postData.title as string),
   });
   const compiledHTML = Handlebars.compile(templateHTML)({
-    logoUrl: req.query.logoUrl,
-    title: req.query.title,
-    content: req.query.content,
-    imgurl: req.query.imgurl,
+    title: postData.title,
+    content: postData.content,
+    img: publicImgURL,
     styles: compiledStyles,
   });
   const browser = await puppeteer.launch({

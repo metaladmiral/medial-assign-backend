@@ -26,7 +26,7 @@ globalRouter.get("/get-post-list", (req, res) => {
 globalRouter.get("/get-post-details", (req, res) => {
   res.send("Hello, TypeScript with Express!");
 });
-globalRouter.get("/generate-og-image", (req, res) => {
+globalRouter.post("/generate-og-image", (req, res) => {
   generateOgImage(req, res);
 });
 

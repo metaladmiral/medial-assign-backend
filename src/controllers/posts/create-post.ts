@@ -40,8 +40,10 @@ async function createPost(req: Request, res: Response) {
   try {
     const user = await PostDbService.createPost(newPost);
 
+    const ogImageFormData = new URLSearchParams(ogImageData);
     const og_img = await axios.post(
       process.env.SERVER_URL + "/v1/generate-og-image",
+      ogImageFormData,
       {
         responseType: "arraybuffer",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },

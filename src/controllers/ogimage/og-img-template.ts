@@ -27,8 +27,8 @@ export const templateHTML = `
 
                 <div class='bottom'>
                     <h1>{{title}}</h1>
-                    {{#if imgurl}}
-                    <img src='{{}}'>
+                    {{#if img}}
+                    <img src='{{img}}'>
                     {{/if}}
 
                 </div>
@@ -64,16 +64,6 @@ body {
   padding: 2.5rem;
   padding-top: 1em;
   height: 90vh;
-  background: #042f7d;
-  {{#if bgUrl}}
-  background-image: url({{bgUrl}});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  {{else}}
-  background: linear-gradient(to right, #042f7d, #007eff);
-//   color: #00ffae;
-  {{/if}}
   background: #090809;
   color: white;
 }

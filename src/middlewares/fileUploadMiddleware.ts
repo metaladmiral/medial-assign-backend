@@ -9,7 +9,7 @@ function genRandFileName(originalFilename: String, fileExtension: String) {
 }
 
 const storage = multer.diskStorage({
-  destination: "./uploads/",
+  destination: "./public/uploads/",
   filename: function (req, file, cb) {
     const randFileName = genRandFileName(
       file.originalname,
