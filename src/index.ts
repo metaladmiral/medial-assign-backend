@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import { createPost } from "./controllers/controllers";
+import { createPost, generateOgImage } from "./controllers/controllers";
 import fileUploadMiddleware from "./middlewares/fileUploadMiddleware";
 
 const app = express();
@@ -26,6 +26,9 @@ globalRouter.get("/get-post-list", (req, res) => {
 });
 globalRouter.get("/get-post-details", (req, res) => {
   res.send("Hello, TypeScript with Express!");
+});
+globalRouter.get("/generate-og-image", (req, res) => {
+  generateOgImage(req, res);
 });
 
 const port = 3000;

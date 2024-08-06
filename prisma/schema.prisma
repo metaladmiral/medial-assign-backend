@@ -15,6 +15,7 @@ datasource db {
 
 model Post {
   id    Int     @id @default(autoincrement())
+  postid String @unique @db.VarChar(60)
   title String @db.VarChar(100)
   content String @db.LongText
   img String? @db.VarChar(255)
