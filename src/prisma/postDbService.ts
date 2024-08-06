@@ -25,7 +25,11 @@ const PostDbService = {
 
   getPostsList: async (limit?: number, offset?: number) => {
     try {
-      const posts = await prisma.post.findMany();
+      const posts = await prisma.post.findMany({
+        orderBy: {
+          id: "desc",
+        },
+      });
       return posts;
     } catch (err) {
       throw err;
