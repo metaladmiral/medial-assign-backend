@@ -37,20 +37,20 @@ const PostDbService = {
       prisma.$disconnect;
     }
   },
-  // getPostList: async (userId: string) => {
-  //   try {
-  //     const userDetails = await prisma.post.findUnique({
-  //       where: {
-  //         user_id: userId,
-  //       },
-  //     });
-  //     return userDetails;
-  //   } catch (err) {
-  //     throw err;
-  //   } finally {
-  //     prisma.$disconnect;
-  //   }
-  // },
+  getPostDetails: async (postId: string) => {
+    try {
+      const userDetails = await prisma.post.findUnique({
+        where: {
+          postid: postId,
+        },
+      });
+      return userDetails;
+    } catch (err) {
+      throw err;
+    } finally {
+      prisma.$disconnect;
+    }
+  },
 };
 
 export default PostDbService;

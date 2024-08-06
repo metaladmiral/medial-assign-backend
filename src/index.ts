@@ -5,6 +5,7 @@ import {
   createPost,
   generateOgImage,
   getPostsList,
+  getPostDetails,
 } from "./controllers/controllers";
 import fileUploadMiddleware from "./middlewares/fileUploadMiddleware";
 
@@ -27,8 +28,8 @@ globalRouter.post("/create-post", fileUploadMiddleware(), (req, res) => {
 globalRouter.get("/get-posts-list", (req, res) => {
   getPostsList(req, res);
 });
-globalRouter.get("/get-post-details", (req, res) => {
-  res.send("Hello, TypeScript with Express!");
+globalRouter.get("/get-post-details/:postid", (req, res) => {
+  getPostDetails(req, res);
 });
 globalRouter.post("/generate-og-image", (req, res) => {
   generateOgImage(req, res);
