@@ -1,11 +1,9 @@
 import { Response, Request } from "express";
 import PostDbService from "../../prisma/postDbService";
 import { Post } from "../../types";
-import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import fs from "fs";
-import { Buffer } from "buffer";
 import { ogImageData } from "../../types";
+import createOgImage from "../ogimage/create-og-img";
 
 async function createPost(req: Request, res: Response) {
   if (process.env.SERVER_URL === undefined) {
@@ -39,22 +37,7 @@ async function createPost(req: Request, res: Response) {
 
   try {
     const user = await PostDbService.createPost(newPost);
-
-    const ogImageFormData = new URLSearchParams(ogImageData);
-    const og_img = await axios.post(
-      process.env.SERVER_URL + "/v1/generate-og-image",
-      ogImageFormData,
-      {
-        responseType: "arraybuffer",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      }
-    );
-    const buffer = Buffer.from(og_img.data, "binary");
-
-    const imagePath = "./public/og-images/" + uuid + ".jpg";
-    const writer = fs.createWriteStream(imagePath);
-    writer.write(buffer);
-    writer.end();
+    await createOgImage(ogImageData, uuid);
 
     return res.json({
       success: true,
